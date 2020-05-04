@@ -1,0 +1,6 @@
+// Import to access Auro utility classes from within a component
+// Unused utility classes will be automatically stripped from the build
+
+@import "../node_modules/@alaskaairux/orion-design-tokens/dist/tokens/SCSSVariables";
+@import "../node_modules/@alaskaairux/orion-web-core-style-sheets/dist/breakpoints";
+@import "../node_modules/@alaskaairux/orion-web-core-style-sheets/dist/headings";

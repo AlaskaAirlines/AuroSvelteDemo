@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset='utf-8'>
 	<meta name='viewport' content='width=device-width,initial-scale=1'>
@@ -7,12 +8,25 @@
 	<title>Svelte app</title>
 
 	<link rel='icon' type='image/png' href='/favicon.png'>
-	<link rel='stylesheet' href='/global.css'>
+	<link rel='stylesheet' href='/build/global.css'>
 	<link rel='stylesheet' href='/build/bundle.css'>
-
-	<script defer src='/build/bundle.js'></script>
 </head>
 
 <body>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=URL%2CArray.from%2Cfetch"></script>
+	<script>
+		function shimport() {
+			try {
+				new Function('import("' + main + '")')();
+			} catch (e) {
+				var s = document.createElement('script');
+				s.src = 'https://unpkg.com/shimport@1.0.1/index.js';
+				s.dataset.main = './build/main.js';
+				document.head.appendChild(s);
+			}
+		}
+		shimport();
+	</script>
 </body>
+
 </html>

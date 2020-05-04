@@ -7,15 +7,38 @@
     "start": "sirv public"
   },
   "devDependencies": {
+    "@alaskaairux/icons": "^3.1.1",
+    "@alaskaairux/ods-button": "^4.4.5",
+    "@alaskaairux/ods-inputoptions": "^2.0.2",
+    "@alaskaairux/orion-design-tokens": "^2.10.15",
+    "@alaskaairux/orion-web-core-style-sheets": "^2.9.3",
+    "@babel/core": "^7.9.6",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
     "@rollup/plugin-commonjs": "11.0.2",
     "@rollup/plugin-node-resolve": "^7.0.0",
+    "core-js": "^3.6.5",
+    "node-sass": "^4.14.1",
     "rollup": "^1.20.0",
+    "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-livereload": "^1.0.0",
+    "rollup-plugin-postcss": "^3.1.1",
     "rollup-plugin-svelte": "^5.0.3",
     "rollup-plugin-terser": "^5.1.2",
-    "svelte": "^3.0.0"
+    "svelte": "^3.0.0",
+    "svelte-preprocess": "^3.7.4"
   },
   "dependencies": {
-    "sirv-cli": "^0.4.4"
-  }
+    "@alaskaairux/ods-toast": "^1.1.2",
+    "@alaskaairux/orion-icons": "^2.1.5",
+    "sirv-cli": "^0.4.5"
+  },
+  "browserslist": [
+    "last 3 chrome version",
+    "last 3 firefox version",
+    "last 3 edge version",
+    "ie 11",
+    "last 2 safari major version"
+  ]
 }

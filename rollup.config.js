@@ -3,6 +3,9 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
+import autoPreprocess from 'svelte-preprocess';
+import postcss from 'rollup-plugin-postcss';
+import babel from 'rollup-plugin-babel';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -10,9 +13,9 @@ export default {
 	input: 'src/main.js',
 	output: {
 		sourcemap: true,
-		format: 'iife',
+		format: 'esm',
 		name: 'app',
-		file: 'public/build/bundle.js'
+		dir: 'public/build'
 	},
 	plugins: [
 		svelte({
@@ -22,7 +25,8 @@ export default {
 			// a separate file - better for performance
 			css: css => {
 				css.write('public/build/bundle.css');
-			}
+			},
+			preprocess: autoPreprocess()
 		}),
 
 		// If you have external dependencies installed from
@@ -35,7 +39,29 @@ export default {
 			dedupe: ['svelte']
 		}),
 		commonjs(),
-
+		// Bundle any Sass imports into a global file
+		postcss({
+			extract: 'global.css',
+			use: ['sass'],
+			minimize: true
+		}),
+		production && babel({
+			extensions: ['.js', '.mjs', '.html', '.svelte'],
+			runtimeHelpers: true,
+			exclude: ['node_modules/@babel/**', 'node_modules/core-js/**'],
+			presets: [
+				['@babel/preset-env', {
+					useBuiltIns: 'usage',
+					corejs: 3
+				}]
+			],
+			plugins: [
+				'@babel/plugin-syntax-dynamic-import',
+				['@babel/plugin-transform-runtime', {
+					useESModules: true
+				}]
+			]
+		}),
 		// In dev mode, call `npm run start` once
 		// the bundle has been generated
 		!production && serve(),
