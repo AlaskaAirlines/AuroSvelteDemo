@@ -50,19 +50,8 @@
 		toaster.add(message);
 	}
 
-	async function loadWebComponents() {
-		await import('@alaskaairux/ods-button/dist/auro-button');
-		await import('@alaskaairux/ods-inputoptions/dist/ods-inputoption');
-		await import('@alaskaairux/ods-inputoptions/dist/ods-inputoption-checkbox-group');
-		await import('@alaskaairux/ods-toast');
-	}
+
 </script>
-
-<svelte:head>
-	<script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.4.3/webcomponents-loader.js" defer></script>
-</svelte:head>
-
-<svelte:window on:WebComponentsReady={loadWebComponents}/>
 
 <main>
 	<h1 class="heading--display">Web Component Demo</h1>

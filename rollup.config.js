@@ -6,6 +6,7 @@ import { terser } from 'rollup-plugin-terser';
 import autoPreprocess from 'svelte-preprocess';
 import postcss from 'rollup-plugin-postcss';
 import babel from 'rollup-plugin-babel';
+import copy from 'rollup-plugin-copy';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -39,6 +40,14 @@ export default {
 			dedupe: ['svelte']
 		}),
 		commonjs(),
+		copy({
+			copyOnce: true,
+			targets: [
+				{ src: 'node_modules/@webcomponents/webcomponentsjs/bundles/*', dest: 'public/build/webcomponentsjs/bundles'},
+				{ src: 'node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js', dest: 'public/build/webcomponentsjs'},
+				{ src: 'node_modules/shimport/index.js', dest: 'public/build/shimport'}
+			]
+		}),
 		// Bundle any Sass imports into a global file
 		postcss({
 			extract: 'global.css',
