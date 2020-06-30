@@ -33,7 +33,7 @@
 		type = type === 'primary' ? 'secondary' : 'primary';
 	}
 
-	function handleInput(e) {
+	function handleChange(e) {
 		// Svelte won't let us bind to custom element groups
 		// So we have to keep track of the checkbox state ourselves, similar to a controlled component in React
 		const { target } = e;
@@ -63,7 +63,7 @@
 			name="cbxDemo"
 			value={option.value} 
 			checked={option.checked || undefined} 
-			on:input={handleInput}>
+			on:change={handleChange}>
 			{option.label}
 		</auro-checkbox>
 		{/each}

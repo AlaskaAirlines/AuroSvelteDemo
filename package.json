@@ -7,7 +7,7 @@
     "start": "sirv public"
   },
   "devDependencies": {
-    "@alaskaairux/auro-checkbox": "^1.0.1",
+    "@alaskaairux/auro-checkbox": "^1.1.0",
     "@alaskaairux/icons": "^3.1.1",
     "@alaskaairux/ods-button": "^4.6.1",
     "@alaskaairux/ods-toast": "^1.1.2",
