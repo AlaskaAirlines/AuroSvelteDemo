@@ -14,7 +14,7 @@ if (window.WebComponents.ready) {
 
 async function loadWebComponents() {
 	await import('@alaskaairux/ods-button/dist/auro-button');
-	await import('@alaskaairux/ods-inputoptions/dist/ods-inputoption');
-	await import('@alaskaairux/ods-inputoptions/dist/ods-inputoption-checkbox-group');
+	await import('@alaskaairux/auro-checkbox');
+	await import('@alaskaairux/auro-checkbox/dist/auro-checkbox-group');
 	await import('@alaskaairux/ods-toast');
 }
