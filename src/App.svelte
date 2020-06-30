@@ -55,13 +55,19 @@
 
 <main>
 	<h1 class="heading--display">Web Component Demo</h1>
-	<ods-inputoption-checkbox-group
-        label={`Your Choice: ${JSON.stringify(selectedOptions)}`}        
-        for="cbxDemo1">
+	<auro-checkbox-group required>
+		<span slot="legend">{`Your Choice: ${JSON.stringify(selectedOptions)}`}</span>
 		{#each options as option}
-		<ods-inputoption id={option.id} label={option.label} type="checkbox" value={option.value} checked={option.checked || undefined} on:input={handleInput}></ods-inputoption>
+		<auro-checkbox 
+			id={option.id} 
+			name="cbxDemo"
+			value={option.value} 
+			checked={option.checked || undefined} 
+			on:input={handleInput}>
+			{option.label}
+		</auro-checkbox>
 		{/each}
-	</ods-inputoption-checkbox-group>
+	</auro-checkbox-group>
 
     <auro-button on:click={toast} secondary={type === 'secondary' || undefined}>Toast</auro-button>
     <auro-button on:click={changeType}>Change Toaster</auro-button>
