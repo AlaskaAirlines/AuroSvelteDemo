@@ -11,13 +11,13 @@
     "@alaskaairux/icons": "^3.1.1",
     "@alaskaairux/ods-button": "^4.6.1",
     "@alaskaairux/ods-toast": "^1.1.2",
-    "@alaskaairux/orion-design-tokens": "^2.10.15",
+    "@alaskaairux/orion-design-tokens": "^2.11.0",
     "@alaskaairux/orion-icons": "^2.1.5",
-    "@alaskaairux/orion-web-core-style-sheets": "^2.9.3",
-    "@babel/core": "^7.9.6",
+    "@alaskaairux/orion-web-core-style-sheets": "^2.10.1",
+    "@babel/core": "^7.10.4",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
-    "@babel/plugin-transform-runtime": "^7.9.6",
-    "@babel/preset-env": "^7.9.6",
+    "@babel/plugin-transform-runtime": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
     "@rollup/plugin-commonjs": "11.0.2",
     "@rollup/plugin-node-resolve": "^7.0.0",
     "@webcomponents/webcomponentsjs": "^2.4.3",
@@ -27,15 +27,15 @@
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-copy": "^3.3.0",
     "rollup-plugin-livereload": "^1.0.0",
-    "rollup-plugin-postcss": "^3.1.1",
-    "rollup-plugin-svelte": "^5.0.3",
+    "rollup-plugin-postcss": "^3.1.2",
+    "rollup-plugin-svelte": "^5.2.3",
     "rollup-plugin-terser": "^5.1.2",
     "shimport": "^1.0.1",
-    "svelte": "^3.0.0",
-    "svelte-preprocess": "^3.7.4"
+    "svelte": "^3.23.2",
+    "svelte-preprocess": "^3.9.12"
   },
   "dependencies": {
-    "sirv-cli": "^0.4.5"
+    "sirv-cli": "^0.4.6"
   },
   "browserslist": [
     "last 3 chrome version",
