@@ -11,96 +11,96 @@ import copy from 'rollup-plugin-copy';
 const production = !process.env.ROLLUP_WATCH;
 
 export default {
-	input: 'src/main.js',
-	output: {
-		sourcemap: true,
-		format: 'esm',
-		name: 'app',
-		dir: 'public/build'
-	},
-	plugins: [
-		svelte({
-			// enable run-time checks when not in production
-			dev: !production,
-			// we'll extract any component CSS out into
-			// a separate file - better for performance
-			css: css => {
-				css.write('public/build/bundle.css');
-			},
-			preprocess: autoPreprocess()
-		}),
+  input: 'src/main.js',
+  output: {
+    sourcemap: true,
+    format: 'esm',
+    name: 'app',
+    dir: 'public/build'
+  },
+  plugins: [
+    svelte({
+      // enable run-time checks when not in production
+      dev: !production,
+      // we'll extract any component CSS out into
+      // a separate file - better for performance
+      css: css => {
+        css.write('public/build/bundle.css');
+      },
+      preprocess: autoPreprocess()
+    }),
 
-		// If you have external dependencies installed from
-		// npm, you'll most likely need these plugins. In
-		// some cases you'll need additional configuration -
-		// consult the documentation for details:
-		// https://github.com/rollup/plugins/tree/master/packages/commonjs
-		resolve({
-			browser: true,
-			dedupe: ['svelte']
-		}),
-		commonjs(),
-		copy({
-			copyOnce: true,
-			targets: [
-				{ src: 'node_modules/@webcomponents/webcomponentsjs/bundles/*', dest: 'public/build/webcomponentsjs/bundles'},
-				{ src: 'node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js', dest: 'public/build/webcomponentsjs'},
-				{ src: 'node_modules/shimport/index.js', dest: 'public/build/shimport'}
-			]
-		}),
-		// Bundle any Sass imports into a global file
-		postcss({
-			extract: 'global.css',
-			use: ['sass'],
-			minimize: true
-		}),
-		production && babel({
-			extensions: ['.js', '.mjs', '.html', '.svelte'],
-			runtimeHelpers: true,
-			exclude: ['node_modules/@babel/**', 'node_modules/core-js/**'],
-			presets: [
-				['@babel/preset-env', {
-					useBuiltIns: 'usage',
-					corejs: 3
-				}]
-			],
-			plugins: [
-				'@babel/plugin-syntax-dynamic-import',
-				['@babel/plugin-transform-runtime', {
-					useESModules: true
-				}]
-			]
-		}),
-		// In dev mode, call `npm run start` once
-		// the bundle has been generated
-		!production && serve(),
+    // If you have external dependencies installed from
+    // npm, you'll most likely need these plugins. In
+    // some cases you'll need additional configuration -
+    // consult the documentation for details:
+    // https://github.com/rollup/plugins/tree/master/packages/commonjs
+    resolve({
+      browser: true,
+      dedupe: ['svelte']
+    }),
+    commonjs(),
+    copy({
+      copyOnce: true,
+      targets: [
+        { src: 'node_modules/@webcomponents/webcomponentsjs/bundles/*', dest: 'public/build/webcomponentsjs/bundles'},
+        { src: 'node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js', dest: 'public/build/webcomponentsjs'},
+        { src: 'node_modules/shimport/index.js', dest: 'public/build/shimport'}
+      ]
+    }),
+    // Bundle any Sass imports into a global file
+    postcss({
+      extract: 'global.css',
+      use: ['sass'],
+      minimize: true
+    }),
+    production && babel({
+      extensions: ['.js', '.mjs', '.html', '.svelte'],
+      runtimeHelpers: true,
+      exclude: ['node_modules/@babel/**', 'node_modules/core-js/**'],
+      presets: [
+        ['@babel/preset-env', {
+          useBuiltIns: 'usage',
+          corejs: 3
+        }]
+      ],
+      plugins: [
+        '@babel/plugin-syntax-dynamic-import',
+        ['@babel/plugin-transform-runtime', {
+          useESModules: true
+        }]
+      ]
+    }),
+    // In dev mode, call `npm run start` once
+    // the bundle has been generated
+    !production && serve(),
 
-		// Watch the `public` directory and refresh the
-		// browser on changes when not in production
-		!production && livereload('public'),
+    // Watch the `public` directory and refresh the
+    // browser on changes when not in production
+    !production && livereload('public'),
 
-		// If we're building for production (npm run build
-		// instead of npm run dev), minify
-		production && terser()
-	],
-	watch: {
-		clearScreen: false
-	}
+    // If we're building for production (npm run build
+    // instead of npm run dev), minify
+    production && terser()
+  ],
+  watch: {
+    clearScreen: false
+  }
 };
 
 function serve() {
-	let started = false;
+  let started = false;
 
-	return {
-		writeBundle() {
-			if (!started) {
-				started = true;
+  return {
+    writeBundle() {
+      if (!started) {
+        started = true;
 
-				require('child_process').spawn('npm', ['run', 'start', '--', '--dev'], {
-					stdio: ['ignore', 'inherit', 'inherit'],
-					shell: true
-				});
-			}
-		}
-	};
+        require('child_process').spawn('npm', ['run', 'start', '--', '--dev'], {
+          stdio: ['ignore', 'inherit', 'inherit'],
+          shell: true
+        });
+      }
+    }
+  };
 }

@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+ - "12"
+
+branches:
+  only:
+    - master
+
+notifactions:
+  email: false
+
+after_success:
+  - npx semantic-release

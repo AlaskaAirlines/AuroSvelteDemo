@@ -4,7 +4,8 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public"
+    "start": "sirv public",
+    "test": "echo \"No tests specified\" && exit 0"
   },
   "devDependencies": {
     "@alaskaairux/auro-checkbox": "^1.1.0",
@@ -18,10 +19,15 @@
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/plugin-transform-runtime": "^7.10.4",
     "@babel/preset-env": "^7.10.4",
+    "@commitlint/cli": "^9.1.1",
+    "@commitlint/config-conventional": "^9.1.1",
     "@rollup/plugin-commonjs": "11.0.2",
     "@rollup/plugin-node-resolve": "^7.0.0",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/git": "^9.0.0",
     "@webcomponents/webcomponentsjs": "^2.4.3",
     "core-js": "^3.6.5",
+    "husky": "^4.2.5",
     "node-sass": "^4.14.1",
     "rollup": "^1.20.0",
     "rollup-plugin-babel": "^4.4.0",
@@ -30,12 +36,51 @@
     "rollup-plugin-postcss": "^3.1.2",
     "rollup-plugin-svelte": "^5.2.3",
     "rollup-plugin-terser": "^5.1.2",
+    "semantic-release": "^17.1.1",
     "shimport": "^1.0.1",
     "svelte": "^3.23.2",
     "svelte-preprocess": "^3.9.12"
   },
   "dependencies": {
     "sirv-cli": "^0.4.6"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "release": {
+    "branch": "master",
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/changelog",
+        {
+          "changelogFile": "./CHANGELOG.md",
+          "changelogTitle": "# Semantic Release Automated Changelog"
+        }
+      ],
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "./CHANGELOG.md",
+            "package.json"
+          ]
+        }
+      ],
+      "@semantic-release/github"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "browserslist": [
     "last 3 chrome version",

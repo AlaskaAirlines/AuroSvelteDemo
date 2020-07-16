@@ -49,8 +49,6 @@
 	function toast() {
 		toaster.add(message);
 	}
-
-
 </script>
 
 <main>
@@ -58,11 +56,11 @@
 	<auro-checkbox-group required>
 		<span slot="legend">{`Your Choice: ${JSON.stringify(selectedOptions)}`}</span>
 		{#each options as option}
-		<auro-checkbox 
-			id={option.id} 
+		<auro-checkbox
+			id={option.id}
 			name="cbxDemo"
-			value={option.value} 
-			checked={option.checked || undefined} 
+			value={option.value}
+			checked={option.checked || undefined}
 			on:change={handleChange}>
 			{option.label}
 		</auro-checkbox>
@@ -75,13 +73,13 @@
 
 <style lang="scss">
 	@import './auroUtils.scss';
-	main {
-        display: block; /* for IE11 */
-		position: relative;
-		max-width: 56em;
-		background-color: white;
-		padding: 2em;
-		margin: 0 auto;
-		box-sizing: border-box;
-    }
+  main {
+    display: block; /* for IE11 */
+    position: relative;
+    max-width: 56em;
+    background-color: white;
+    padding: 2em;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
 </style>
