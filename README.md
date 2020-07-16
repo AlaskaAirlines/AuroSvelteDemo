@@ -1,5 +1,7 @@
 # Svelte Demo
 
+![Travis (.org)](https://img.shields.io/travis/alaskaairlines/AuroSvelteDemo?style=for-the-badge) ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/AlaskaAirlines/AuroSvelteDemo?style=for-the-badge)
+
 This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
 
 To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
