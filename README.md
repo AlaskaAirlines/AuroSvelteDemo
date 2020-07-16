@@ -2,94 +2,87 @@
 
 ![Travis (.org)](https://img.shields.io/travis/alaskaairlines/AuroSvelteDemo?style=for-the-badge) ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/AlaskaAirlines/AuroSvelteDemo?style=for-the-badge)
 
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
+Interested in starting a new project using Auro and React? This demo project is a complete example that includes basic setup. 
+
+To locally run this demo: 
+
+```bash
+$ git clone https://github.com/AlaskaAirlines/AuroSveleteDemo.git
+```
+
+The app runs and works in all [supported browsers](http://auro.alaskaair.com/support/browsersSupport). Please explore the project source to see how the Auro components are being used in a React development environment. 
+
+This is a project template for [Svelte](https://svelte.dev) apps. It lives at [https://github.com/sveltejs/template](https://github.com/sveltejs/template).
 
 To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
 
-```bash
-  $ npx degit sveltejs/template svelte-app
-  $ cd svelte-app
-```
+## Example App API
 
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
+This project configured to work with `npm`. Within the root directory of the app, you can:
 
+| Command | Description
+|---|---
+| npm start | Runs the app in the development mode.<br />Open [http://localhost:5000](http://localhost:5000) to view it in the browser.
+| npm run build | Production build in the `build` folder.
+| npm run dev | Runs dev server with browser sync enabled.
 
-## Get started
+## Setting up new React project with Auro Web Components
 
-Install the dependencies...
+The following steps will let you start using Web Components in your Svelte application across all [supported browsers](https://auro.alaskaair.com/support/browsersSupport).
 
-```bash
-  $ cd svelte-app
-  $ npm install
-```
+### Install
 
-...then start [Rollup](https://rollupjs.org):
-
-```bash
-  $ npm run dev
-```
-
-Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
-
-By default, the server will only respond to requests from localhost. To allow connections from other computers, edit the `sirv` commands in package.json to include the option `--host 0.0.0.0`.
-
-
-## Building and running in production mode
-
-To create an optimized version of the app:
-
-```bash
-  $ npm run build
-```
-
-You can run the newly built app with `npm run start`. This uses [sirv](https://github.com/lukeed/sirv), which is included in your package.json's `dependencies` so that the app will work when you deploy to platforms like [Heroku](https://heroku.com).
-
-
-## Single-page app mode
-
-By default, sirv will only respond to requests that match files in `public`. This is to maximize compatibility with static file-servers, allowing you to deploy your app anywhere.
-
-If you're building a single-page app (SPA) with multiple routes, sirv needs to be able to respond to requests for *any* path. You can make it so by editing the `"start"` command in package.json:
+The following command will install ods-button, design tokens and focus-visible. 
 
 ```js
-  $ "start": "sirv public --single"
+$ npm install --save-dev @alaskaairux/ods-button @alaskaairux/orion-design-tokens focus-visible
 ```
 
+### Web Components polyfill
 
-## Deploying to the web
+Web Components polyfill is loaded via rollup.
 
-### Now
-
-Install [now](https://zeit.co/now) if you haven't already:
-
-```bash
-  $ npm install -g now
+```js
+  targets: [
+    { src: 'node_modules/@webcomponents/webcomponentsjs/bundles/*', dest: 'public/build/webcomponentsjs/bundles'},
+    { src: 'node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js', dest: 'public/build/webcomponentsjs'},
+    { src: 'node_modules/shimport/index.js', dest: 'public/build/shimport'}
+  ]
 ```
 
-Then, from within your project folder:
+### Web components manifest / main.js
 
-```bash
-  $ cd public
-  $ now deploy --name my-project
+Add web component references to the main.js file in the `./src` directory to load all the web components. 
+
+```js
+async function loadWebComponents() {
+	await import('@alaskaairux/ods-button/dist/auro-button');
+	await import('@alaskaairux/auro-checkbox');
+	await import('@alaskaairux/auro-checkbox/dist/auro-checkbox-group');
+	await import('@alaskaairux/ods-toast');
+}
 ```
 
-As an alternative, use the [Now desktop client](https://zeit.co/download) and simply drag the unzipped project folder to the taskbar icon.
+Main.js is loaded into the rollup config. 
 
-### Surge
+### Design tokens
 
-Install [surge](https://surge.sh/) if you haven't already:
+Design tokens are a set of pre-defined variables used to manage the design of products. 
 
-```bash
-  $ npm install -g surge
+```shell
+auroUtils.scss
+@import "../node_modules/@alaskaairux/orion-design-tokens/dist/tokens/SCSSVariables";
+
+global.scss
+@import "../node_modules/@alaskaairux/orion-design-tokens/dist/tokens/SassCustomProperties";
+@import "../node_modules/@alaskaairux/orion-design-tokens/dist/tokens/SCSSVariables";
+@import '../node_modules/@alaskaairux/orion-design-tokens/dist/tokens/TokenProperties';
 ```
 
-Then, from within your project folder:
+## Icons
 
-```bash
-  $ npm run build
-  $ surge public my-project.surge.sh
-```
+Components may have a dependency on Auro icons. The icons package simply needs to be installed and all the references are within the components themselves. 
 
-## Svelte resources 
+## Development 
 
-*Looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
+This project uses Semantic Release with Conventional Commits. Please be sure to review our [Contributing Guidelines](https://auro.alaskaair.com/getting-started/developers/contributing) for more info. 
