@@ -2,15 +2,15 @@
 
 ![Travis (.org)](https://img.shields.io/travis/alaskaairlines/AuroSvelteDemo?style=for-the-badge) ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/AlaskaAirlines/AuroSvelteDemo?style=for-the-badge)
 
-Interested in starting a new project using Auro and React? This demo project is a complete example that includes basic setup. 
+Interested in starting a new project using Auro and Svelte? This demo project is a complete example that includes basic setup. 
 
 To locally run this demo: 
 
 ```bash
-$ git clone https://github.com/AlaskaAirlines/AuroSveleteDemo.git
+$ git clone https://github.com/AlaskaAirlines/AuroSvelteDemo.git
 ```
 
-The app runs and works in all [supported browsers](http://auro.alaskaair.com/support/browsersSupport). Please explore the project source to see how the Auro components are being used in a React development environment. 
+The app runs and works in all [supported browsers](http://auro.alaskaair.com/support/browsersSupport). Please explore the project source to see how the Auro components are being used in a Svelte development environment. 
 
 This is a project template for [Svelte](https://svelte.dev) apps. It lives at [https://github.com/sveltejs/template](https://github.com/sveltejs/template).
 
@@ -18,7 +18,7 @@ To create a new project based on this template using [degit](https://github.com/
 
 ## Example App API
 
-This project configured to work with `npm`. Within the root directory of the app, you can:
+This project is configured to work with `npm`. Within the root directory of the app, you can:
 
 | Command | Description
 |---|---
@@ -26,7 +26,7 @@ This project configured to work with `npm`. Within the root directory of the app
 | npm run build | Production build in the `build` folder.
 | npm run dev | Runs dev server with browser sync enabled.
 
-## Setting up new React project with Auro Web Components
+## Setting up a new Svelte project with Auro Web Components
 
 The following steps will let you start using Web Components in your Svelte application across all [supported browsers](https://auro.alaskaair.com/support/browsersSupport).
 
