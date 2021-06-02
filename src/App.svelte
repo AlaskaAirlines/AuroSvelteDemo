@@ -74,7 +74,6 @@
 <style lang="scss">
 	@import './auroUtils.scss';
   main {
-    display: block; /* for IE11 */
     position: relative;
     max-width: 56em;
     background-color: white;

@@ -25,7 +25,6 @@
     "@rollup/plugin-node-resolve": "^7.0.0",
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/git": "^9.0.0",
-    "@webcomponents/webcomponentsjs": "^2.4.3",
     "core-js": "^3.6.5",
     "husky": "^6.0.0",
     "node-sass": "^4.14.1",
@@ -80,7 +79,6 @@
     "last 3 chrome version",
     "last 3 firefox version",
     "last 3 edge version",
-    "ie 11",
     "last 2 safari major version"
   ]
 }

@@ -2,15 +2,15 @@
 
 ![Travis (.org)](https://img.shields.io/travis/alaskaairlines/AuroSvelteDemo?style=for-the-badge) ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/AlaskaAirlines/AuroSvelteDemo?style=for-the-badge)
 
-Interested in starting a new project using Auro and Svelte? This demo project is a complete example that includes basic setup. 
+Interested in starting a new project using Auro and Svelte? This demo project is a complete example that includes basic setup.
 
-To locally run this demo: 
+To locally run this demo:
 
 ```bash
 $ git clone https://github.com/AlaskaAirlines/AuroSvelteDemo.git
 ```
 
-The app runs and works in all [supported browsers](http://auro.alaskaair.com/support/browsersSupport). Please explore the project source to see how the Auro components are being used in a Svelte development environment. 
+The app runs and works in all [supported browsers](http://auro.alaskaair.com/support/browsersSupport). Please explore the project source to see how the Auro components are being used in a Svelte development environment.
 
 This is a project template for [Svelte](https://svelte.dev) apps. It lives at [https://github.com/sveltejs/template](https://github.com/sveltejs/template).
 
@@ -32,42 +32,15 @@ The following steps will let you start using Web Components in your Svelte appli
 
 ### Install
 
-The following command will install ods-button, design tokens and focus-visible. 
+The following command will install ods-button, design tokens and focus-visible.
 
 ```js
 $ npm install --save-dev @alaskaairux/ods-button @alaskaairux/orion-design-tokens focus-visible
 ```
 
-### Web Components polyfill
-
-Web Components polyfill is loaded via rollup.
-
-```js
-  targets: [
-    { src: 'node_modules/@webcomponents/webcomponentsjs/bundles/*', dest: 'public/build/webcomponentsjs/bundles'},
-    { src: 'node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js', dest: 'public/build/webcomponentsjs'},
-    { src: 'node_modules/shimport/index.js', dest: 'public/build/shimport'}
-  ]
-```
-
-### Web components manifest / main.js
-
-Add web component references to the main.js file in the `./src` directory to load all the web components. 
-
-```js
-async function loadWebComponents() {
-	await import('@alaskaairux/ods-button/dist/auro-button');
-	await import('@alaskaairux/auro-checkbox');
-	await import('@alaskaairux/auro-checkbox/dist/auro-checkbox-group');
-	await import('@alaskaairux/ods-toast');
-}
-```
-
-Main.js is loaded into the rollup config. 
-
 ### Design tokens
 
-Design tokens are a set of pre-defined variables used to manage the design of products. 
+Design tokens are a set of pre-defined variables used to manage the design of products.
 
 ```shell
 auroUtils.scss
@@ -81,8 +54,8 @@ global.scss
 
 ## Icons
 
-Components may have a dependency on Auro icons. The icons package simply needs to be installed and all the references are within the components themselves. 
+Components may have a dependency on Auro icons. The icons package simply needs to be installed and all the references are within the components themselves.
 
-## Development 
+## Development
 
-This project uses Semantic Release with Conventional Commits. Please be sure to review our [Contributing Guidelines](https://auro.alaskaair.com/getting-started/developers/contributing) for more info. 
+This project uses Semantic Release with Conventional Commits. Please be sure to review our [Contributing Guidelines](https://auro.alaskaair.com/getting-started/developers/contributing) for more info.

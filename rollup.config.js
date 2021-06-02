@@ -43,8 +43,6 @@ export default {
     copy({
       copyOnce: true,
       targets: [
-        { src: 'node_modules/@webcomponents/webcomponentsjs/bundles/*', dest: 'public/build/webcomponentsjs/bundles'},
-        { src: 'node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js', dest: 'public/build/webcomponentsjs'},
         { src: 'node_modules/shimport/index.js', dest: 'public/build/shimport'}
       ]
     }),
