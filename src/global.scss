@@ -1,10 +1,25 @@
 // Global Auro styles
 
-@import "../node_modules/@alaskaairux/orion-design-tokens/dist/tokens/SassCustomProperties";
-@import "../node_modules/@alaskaairux/orion-design-tokens/dist/tokens/SCSSVariables";
-@import '../node_modules/@alaskaairux/orion-design-tokens/dist/tokens/TokenProperties';
-@import "../node_modules/@alaskaairux/orion-web-core-style-sheets/dist/fonts";
-@import "../node_modules/@alaskaairux/orion-web-core-style-sheets/dist/normalize";
+@import '../node_modules/@alaskaairux/design-tokens/dist/tokens/SCSSVariables'; // Auro design tokens as Sass variables, required to import WCSS
+@import '../node_modules/@alaskaairux/design-tokens/dist/tokens/SassCustomProperties'; // Auro design tokens as CSS Custom Properties, used by auro-* components
 
-@import "../node_modules/@alaskaairux/orion-web-core-style-sheets/dist/essentials";
-@import "../node_modules/@alaskaairux/orion-web-core-style-sheets/dist/breakpoints";
+@import '../node_modules/@alaskaairux/webcorestylesheets/dist/breakpoints';
+@import '../node_modules/@alaskaairux/webcorestylesheets/dist/fonts';
+@import '../node_modules/@alaskaairux/webcorestylesheets/dist/normalize';
+@import '../node_modules/@alaskaairux/webcorestylesheets/dist/essentials';
+@import '../node_modules/@alaskaairux/webcorestylesheets/dist/headings';
+
+main {
+  background-color: var(--auro-color-background-lightest);
+  padding: var(--auro-size-xl);
+}
+
+.formDataWrapper {
+  margin-top: var(--auro-size-md);
+  padding: var(--auro-size-xs) var(--auro-size-md);
+  background: repeating-linear-gradient(45deg,#f3f3f3,#f3f3f3 10px,var(--auro-color-base-white) 0,var(--auro-color-base-white) 20px);
+}
+
+.util_displayHidden {
+  display: none;
+}

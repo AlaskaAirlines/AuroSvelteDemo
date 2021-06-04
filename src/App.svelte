@@ -1,84 +1,146 @@
-<script context="module">
-	import Swipe from '@alaskaairux/ods-toast/dist/swipe.js';
-	window.Swipe = Swipe;
-</script>
-
 <script>
-	import Toaster from '@alaskaairux/ods-toast/dist/toaster';
-	import '@alaskaairux/ods-toast/dist/toaster.css';
+	let formData = {};
 
-	const toaster = new Toaster();
-
-	let type = 'primary';
-	$: message = type === 'primary' ? 'message 1' : 'message 2';
-
-	let options = [
+	const flierOptions = [
 		{
-			id: 'cbx1',
-			value: 'yes',
-			label: 'Yes',
-			checked: false
+			'id': 'flierYes',
+			'label': 'Yes',
+			'value': true
 		},
 		{
-			id: 'cbx2',
-			value: 'no',
-			label: 'No',
-			checked: false
+			'id': 'flierNo',
+			'label': 'No',
+			'value': false
 		}
 	];
 
-	$: selectedOptions = options.filter(option => option.checked).map(option => option.value);
+	const destinationOptions = [
+		{
+			'label': 'Lower 48',
+			'value': 'lower48'
+		},
+		{
+			'label': 'Alaska',
+			'value': 'alaska'
+		},
+		{
+			'label': 'Hawaii',
+			'value': 'alaska'
+		},
+		{
+			'label': 'Canada',
+			'value': 'canada'
+		},
+		{
+			'label': 'Mexico',
+			'value': 'mexico'
+		}
+	];
 
-	function changeType() {
-		type = type === 'primary' ? 'secondary' : 'primary';
+	function calcDestinations(e) {
+		const destination = e.target.id;
+		const state = e.target.checked;
+
+		let d = []
+
+		if (formData.hasOwnProperty('destinations') && formData.destinations.length > 0) {
+			d = formData.destinations;
+		}
+
+		if (d.includes(destination) && !state) {
+			d.splice(d.indexOf(destination), 1);
+		} else if (state) {
+			d.push(destination);
+		}
+
+		if (d.length > 0) {
+			formData.destinations = d;
+		} else {
+			delete formData.destinations;
+		}
+
+		document.querySelector('#formData').innerHTML = JSON.stringify(formData);
 	}
 
-	function handleChange(e) {
-		// Svelte won't let us bind to custom element groups
-		// So we have to keep track of the checkbox state ourselves, similar to a controlled component in React
-		const { target } = e;
+	function setValue(e) {
+		const destintationGroupEl = document.querySelector('#destinationGroup');
+		const submitButtonEl = document.querySelector('auro-button[type="submit"]');
 
-		options.forEach((option, i) => {
-			if (option.value === target.value) {
-				// direct assignment to array needed to trigger update
-				options[i] = { ...option, checked: target.checked };
+		let key = e.target.id;
+		if (key.includes('flier')) {
+			key = 'flier';
+		}
+
+		const value = e.target.value;
+
+		if (value === undefined) {
+			delete formData[key];
+		} else {
+			formData[key] = value;
+		}
+
+		const hasfName = formData.hasOwnProperty('fName') && formData.fName.length > 0;
+		const haslName = formData.hasOwnProperty('lName') && formData.lName.length > 0;
+		const hasFlier = formData.hasOwnProperty('flier') && typeof formData.flier === 'boolean';
+
+		if (hasFlier) {
+			if (formData.flier) {
+				destintationGroupEl.classList.remove('util_displayHidden');
+			} else {
+				destintationGroupEl.classList.add('util_displayHidden');
+				delete formData.destinations;
 			}
-		})
+		}
+
+		if (hasfName && haslName && hasFlier) {
+			submitButtonEl.removeAttribute('disabled');
+		} else {
+			if (!submitButtonEl.hasAttribute('disabled')) {
+				submitButtonEl.setAttribute('disabled', true);
+			}
+		}
+
+		document.querySelector('#formData').innerHTML = JSON.stringify(formData);
 	}
 
-	function toast() {
-		toaster.add(message);
+	function handleSubmit() {
+		console.warn('Form JSON Data:', formData);
+		alert(`Form JSON Data: ` + JSON.stringify(formData));
 	}
 </script>
 
 <main>
-	<h1 class="heading--display">Web Component Demo</h1>
-	<auro-checkbox-group required>
-		<span slot="legend">{`Your Choice: ${JSON.stringify(selectedOptions)}`}</span>
-		{#each options as option}
-		<auro-checkbox
-			id={option.id}
-			name="cbxDemo"
-			value={option.value}
-			checked={option.checked || undefined}
-			on:change={handleChange}>
-			{option.label}
-		</auro-checkbox>
-		{/each}
-	</auro-checkbox-group>
-
-    <auro-button on:click={toast} secondary={type === 'secondary' || undefined}>Toast</auro-button>
-    <auro-button on:click={changeType}>Change Toaster</auro-button>
+	<auro-header>JavaScript Web Component Demo</auro-header>
+	<form>
+		<auro-input label="First Name" id="fName" required on:input={setValue}></auro-input>
+		<auro-input label="Last Name" id="lName" required on:input={setValue}></auro-input>
+		<br />
+		<auro-radio-group id="flierGroup" required on:input={setValue}>
+			<span slot="legend">
+				Have you ever flown with Alaska Air?
+			</span>
+			{#each flierOptions as option}
+			<auro-radio
+				id={option.id}
+				label={option.label}
+				value={option.value}>
+			</auro-radio>
+			{/each}
+		</auro-radio-group>
+		<auro-checkbox-group id="destinationGroup" class="util_displayHidden" on:input={calcDestinations}>
+			<span slot="legend">What destinations have you traveled to?</span>
+			{#each destinationOptions as option}
+			<auro-checkbox
+				id={option.value}
+				name={option.value}
+				value={option.value}>
+				{option.label}
+			</auro-checkbox>
+			{/each}
+		</auro-checkbox-group>
+	</form>
+	<auro-button type="submit" disabled on:click={handleSubmit}>Submit</auro-button>
+	<div class="formDataWrapper">
+		Form Data: <span id="formData"></span>
+	</div>
 </main>
-
-<style lang="scss">
-	@import './auroUtils.scss';
-  main {
-    position: relative;
-    max-width: 56em;
-    background-color: white;
-    padding: 2em;
-    margin: 0 auto;
-    box-sizing: border-box;
-  }
-</style>
