@@ -13,19 +13,7 @@
 </head>
 
 <body>
-	<script>
-		function shimport() {
-			try {
-				new Function('import("' + main + '")')();
-			} catch (e) {
-				var s = document.createElement('script');
-				s.src = './build/shimport/index.js';
-				s.dataset.main = './build/main.js';
-				document.head.appendChild(s);
-			}
-		}
-		shimport();
-	</script>
+	<script src="/build/main.js" type="module"></script>
 </body>
 
 </html>

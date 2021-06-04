@@ -6,7 +6,6 @@ import { terser } from 'rollup-plugin-terser';
 import autoPreprocess from 'svelte-preprocess';
 import postcss from 'rollup-plugin-postcss';
 import babel from 'rollup-plugin-babel';
-import copy from 'rollup-plugin-copy';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -37,15 +36,9 @@ export default {
     // https://github.com/rollup/plugins/tree/master/packages/commonjs
     resolve({
       browser: true,
-      dedupe: ['svelte']
+      dedupe: ['svelte', 'lit-element', 'lit-html']
     }),
     commonjs(),
-    copy({
-      copyOnce: true,
-      targets: [
-        { src: 'node_modules/shimport/index.js', dest: 'public/build/shimport'}
-      ]
-    }),
     // Bundle any Sass imports into a global file
     postcss({
       extract: 'global.css',
