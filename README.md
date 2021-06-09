@@ -17,14 +17,12 @@ Within the root directory of the app, you can:
 | npm start | Runs the app in the development mode.<br />Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 ||Browser sync and linting in the CLI is enabled.
 | npm test | Launches the test runner in the interactive watch mode
-|| See [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 | npm build | Production build in the `build` folder.<br>Optimized, minimized and prepared for deployment
-||See [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 
-## Setting up new React project with Auro Web Components
+## Setting up a new Svelte project with Auro Web Components
 
-The following steps will let you start using Web Components in your React application across all supported browsers.
+The following steps will let you start using Web Components in your Svelte application across all supported browsers.
 
 ### Install
 
@@ -45,7 +43,7 @@ $ npm install --save-dev @alaskaairux/auro-button @alaskaairux/auro-checkbox @al
 
 WC Style Sheets (WCSS) is a responsive, mobile-first collection of styles and tools designed to make it quick and simple for developers to create web experiences using the Auro Design Language.
 
-This resource is built using Sass, [Dart Sass](https://www.npmjs.com/package/sass) is the preferred library for Create React App.
+This resource is built using Sass, [Dart Sass](https://www.npmjs.com/package/sass) is the preferred library for creating a svelte app.
 
 ```
 $ npm i sass -D
