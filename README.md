@@ -2,9 +2,9 @@
 
 ![Travis (.org)](https://img.shields.io/travis/alaskaairlines/AuroSvelteDemo?style=for-the-badge) ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/AlaskaAirlines/AuroSvelteDemo?style=for-the-badge)
 
-An example Svelte project with Auro Components integrated. This app runs and works in all Alaska-supported browsers. Explore the project source to see the Auro Components being used in a frameworkless environment.
+An example Svelte project with Auro Components integrated. This app runs and works in all Alaska-supported browsers. Explore the project source to see the Auro Components being used.
 
-Below are instructions for adding Auro compatibility to your project. A familiarity with modern Javascript development and bundlers such as Webpack is expected.
+Below are instructions for adding Auro compatibility to your project. A familiarity with modern Javascript development is expected.
 
 ## Example App API
 
@@ -16,8 +16,8 @@ Within the root directory of the app, you can:
 |---|---
 | npm start | Runs the app in the development mode.<br />Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 ||Browser sync and linting in the CLI is enabled.
-| npm test | Launches the test runner in the interactive watch mode
 | npm build | Production build in the `build` folder.<br>Optimized, minimized and prepared for deployment
+| npm run dev | This will build and watch the code base as well as serve the application on your localhost.
 
 
 ## Setting up a new Svelte project with Auro Web Components
