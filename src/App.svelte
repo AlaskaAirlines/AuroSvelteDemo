@@ -1,7 +1,5 @@
 <script>
-	let formData = {
-		destinations: []
-	};
+	let formData = {};
 
 	const flierOptions = [
 		{
@@ -39,7 +37,7 @@
 		}
 	];
 
-	$: disableSubmitButton = !isFormDataValid(formData.fName, formData.lName, formData.flier);
+	$: disableSubmitButton = !isFormDataValid(formData);
 
 	function handleCheckboxChange({ target }) {
 		if (target.checked) {
@@ -52,17 +50,29 @@
 	}
 
 	function handleInput({ target }) {
-		formData[target.id] = target.value;
+		if (target.value && target.value.length > 0) {
+			formData[target.id] = target.value;
+		} else {
+			delete formData[target.id];
+			formData = formData; // necessary to trigger Svelte reactivity
+		}
 	}
 
 	function handleRadioChange({ target }) {
 		formData.flier = target.value;
+
+		if (formData.flier) {
+			formData.destinations = [];
+		} else {
+			delete formData.destinations;
+			formData = formData; // necessary to trigger Svelte reactivity
+		}
 	}
 
-	function isFormDataValid(fName, lName, flier) {
-		const hasfName = fName && fName.length > 0;
-		const haslName = lName && lName.length > 0;
-		const hasFlier = typeof flier === 'boolean';
+	function isFormDataValid(d) {
+		const hasfName = d.fName && d.fName.length > 0;
+		const haslName = d.lName && d.lName.length > 0;
+		const hasFlier = d.flier && typeof d.flier === 'boolean';
 		return hasfName && haslName && hasFlier;
 	}
 
