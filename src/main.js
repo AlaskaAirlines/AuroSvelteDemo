@@ -5,16 +5,11 @@ const app = new App({
 	target: document.body
 });
 
-if (window.WebComponents.ready) {
-	// polyfills have already been loaded
-	loadWebComponents();
-} else {
-	window.addEventListener('WebComponentsReady', loadWebComponents);
-}
-
-async function loadWebComponents() {
-	await import('@alaskaairux/ods-button/dist/auro-button');
-	await import('@alaskaairux/auro-checkbox');
-	await import('@alaskaairux/auro-checkbox/dist/auro-checkbox-group');
-	await import('@alaskaairux/ods-toast');
-}
+/* Import any web components used here */
+import '@alaskaairux/auro-button';
+import "@alaskaairux/auro-checkbox";
+import "@alaskaairux/auro-checkbox/dist/auro-checkbox-group";
+import '@alaskaairux/auro-header';
+import '@alaskaairux/auro-input';
+import "@alaskaairux/auro-radio";
+import "@alaskaairux/auro-radio/dist/auro-radio-group";
