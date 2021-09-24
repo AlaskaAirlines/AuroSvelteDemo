@@ -1,4 +1,12 @@
 <script>
+	import '@alaskaairux/auro-button';
+	import "@alaskaairux/auro-checkbox";
+	import "@alaskaairux/auro-checkbox/dist/auro-checkbox-group";
+	import '@alaskaairux/auro-header';
+	import '@alaskaairux/auro-input';
+	import "@alaskaairux/auro-radio";
+	import "@alaskaairux/auro-radio/dist/auro-radio-group";
+
 	let formData = {};
 
 	const flierOptions = [
@@ -72,7 +80,7 @@
 	function isFormDataValid(d) {
 		const hasfName = d.fName && d.fName.length > 0;
 		const haslName = d.lName && d.lName.length > 0;
-		const hasFlier = d.flier && typeof d.flier === 'boolean';
+		const hasFlier = typeof d.flier === 'boolean';
 		return hasfName && haslName && hasFlier;
 	}
 
