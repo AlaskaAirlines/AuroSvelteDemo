@@ -7,6 +7,7 @@ import userEvent from '@testing-library/user-event';
 beforeAll(() => {
 	// testing-library uses querySelectorAll to find elements
 	// Replace it with a function that will find elements in shadow roots
+	// TODO: document why we do this on the body
 	document.body.querySelectorAll = querySelectorAllDeep;
 	document.body.querySelector = querySelectorDeep;
 })
@@ -58,6 +59,7 @@ it('tracks checked destinations', async () => {
 	userEvent.click(radio);
 
 	// due to a bug with testing library, we can't use findByLabelText when the label contains a <slot>
+	// TODO: custom query? 
 	const alaska = await screen.findByRole('checkbox', { name: 'Alaska' });
 	userEvent.click(alaska);
 	expect(alaska).toBeChecked();
