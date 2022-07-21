@@ -39,6 +39,8 @@
 
 	$: disableSubmitButton = !isFormDataValid(formData);
 
+	$: allCities = [];
+
 	function handleCheckboxChange({ target }) {
 		if (target.checked) {
 			formData.destinations = [...formData.destinations, target.value];
@@ -58,6 +60,15 @@
 		}
 	}
 
+	function handleCombobox({ target }) {
+		if (target.value && target.value.length > 0) {
+			formData[target.id] = target.value;
+		} else {
+			delete formData[target.id];
+			formData = formData; // necessary to trigger Svelte reactivity
+		}
+	}
+
 	function handleRadioChange({ target }) {
 		formData.flier = target.value;
 
@@ -68,6 +79,39 @@
 			formData = formData; // necessary to trigger Svelte reactivity
 		}
 	}
+
+	async function getDataFromAPI(event) {
+    console.log('GOT HEREEEEEE');
+
+		const apiURL = 'https://apis.test.alaskaair.com/guestServices/citysearch/SearchCities/codeshare/';
+
+    // NEED to fix:  the response 404 on the browser
+    let response =   await fetch(`${apiURL + event.target.__displayValue}`);
+
+
+    // We only want to get the data if there is a response else set the cities to empty array
+    if(response.ok){
+      allCities = [];
+      // convert the response into JSON
+      let data = await response.json();
+
+      console.log(data.length);
+      console.log(data);
+
+      // Assign all the matched cities into a global variable for later use
+      allCities = data.map(obj => {
+        const tempCities = { S: obj.S ,N: obj.N, C: obj.C};
+        return tempCities;
+      });
+
+      console.log(allCities);
+
+      //console.log (values[0]);
+    }
+    else{
+      allCities = [];
+    }
+  }
 
 	function isFormDataValid(d) {
 		const hasfName = d.fName && d.fName.length > 0;
@@ -80,13 +124,26 @@
 		console.warn('Form JSON Data:', formData);
 		alert(`Form JSON Data: ` + JSON.stringify(formData));
 	}
+
+	getDataFromAPI();
 </script>
 
 <main>
 	<auro-header>JavaScript Web Component Demo</auro-header>
 	<form>
-		<auro-input label="First Name" id="fName" required={true} on:input={handleInput}></auro-input>
-		<auro-input label="Last Name" id="lName" required={true} on:input={handleInput}></auro-input>
+		<auro-input label="First Name" id="fName" required={true} on:input={handleInput} bordered></auro-input>
+		<auro-input label="Last Name" id="lName" required={true} on:input={handleInput} bordered></auro-input>
+		<auro-combobox id="homeAirport" on:auroCombobox-valueSet={handleCombobox}>
+			<span slot="label">Home Airport</span>
+			<auro-menu>
+				<auro-menuoption value="Seattle" id="option-0">Seattle</auro-menuoption>
+				<auro-menuoption value="San Diego" id="option-1">San Diego</auro-menuoption>
+				<auro-menuoption value="New York City" id="option-2">New York City</auro-menuoption>
+				<auro-menuoption value="Miami" id="option-3">Miami</auro-menuoption>
+				<auro-menuoption value="Chicago" id="option-4">Chicago</auro-menuoption>
+				<auro-menuoption static nomatch>No matching option</auro-menuoption>
+			</auro-menu>
+		</auro-combobox>
 		<auro-radio-group id="flierGroup" required={true} on:change={handleRadioChange}>
 			<span slot="legend">
 				Have you ever flown with Alaska Air?
@@ -122,17 +179,20 @@
 
 <style>
 	main {
-		background-color: var(--auro-color-background-lightest);
-		padding: var(--auro-size-xl);
+	  padding: var(--auro-size-xl);
+
+	  background-color: var(--auro-color-background-lightest);
 	}
 
 	#flierGroup {
-		margin-top: 1rem;
+	  margin-top: 1rem;
 	}
 
 	.formDataWrapper {
-		margin-top: var(--auro-size-md);
-		padding: var(--auro-size-xs) var(--auro-size-md);
-		background: repeating-linear-gradient(45deg,#f3f3f3,#f3f3f3 10px,var(--auro-color-base-white) 0,var(--auro-color-base-white) 20px);
+	  margin-top: var(--auro-size-md);
+	  padding: var(--auro-size-xs) var(--auro-size-md);
+
+	  background: repeating-linear-gradient(45deg,#f3f3f3,#f3f3f3 10px,var(--auro-color-base-white) 0,var(--auro-color-base-white) 20px);
 	}
+
 </style>
